@@ -49,48 +49,51 @@ tag latest dans un projet Docker ?*
     * -d : L'option lance un conteneur en arrière-plan.
     * -p 9001:80 : Mappe le port 9001 de l’hôte au port 80 du conteneur.
     * --name my-php : Définie le nom du conteneur.
-    * -v "$PWD":/var/www/html : Sert à monter un volume 
+    * -v "$PWD":/var/www/html : Sert à monter un volume le $PWD represente le répertoire de la machine hôte,
+        et le /var/www/html représente le dossier ou monter le volum dans le conteneur.
 
 
 *9. Avec quelle commande docker peut-on arrêter tous les conteneurs ?*
 
-    **Réponse:**
+    docker stop $(docker ps -q)
 
 *10. Quelles précautions doit-on prendre pour construire une image afin de la garder de petite taille et
 faciliter sa reconstruction ? (2 points)*
 
-    **Réponse:**
+    Il faut utiliser une image de base légère et supprimer les fichier temporaires.
 
 
 *11. Lorsqu’un conteneur s’arrête, tout ce qu’il a pu écrire sur le disque ou en mémoire est perdu. Vrai
 ou faux ? Pourquoi ?*
 
-    **Réponse:**
+    Faux, les données écrite sur le disque du conteneur sont conservées mais pas celles en mémoire.
 
 
 *12. Lorsqu’une image est crée, elle ne peut plus être modifiée. Vrai ou faux ?*
 
-    **Réponse:**
+    Vrai.
 
 
 *13. Comment peut-on publier et obtenir facilement des images ?*
 
-    **Réponse:**
+    On peut publier des images sur un registre avec docker push après s’être connecté et obtenir des images avec docker pull.
 
 
 *14. Comment s’appelle l’image de plus petite taille possible ? Que contient-elle ?*
 
-    **Réponse:**
+    L’image la plus petite possible s’appelle scratch, elle ne contient rien
 
 
 *15. Par quel moyen le client docker communique avec le serveur dockerd ? Est-il possible de
 communiquer avec le serveur via le protocole HTTP ? Pourquoi ?*
 
-    **Réponse:**
+    Le client Docker communique via un socket Unix sur Linux "docker.socket" ou un pipe nommé sur windows.
+    Non pas par HTTP pour des raisons de sécurité.
+
 
 
 *16. Un conteneur doit lancer un processus par défaut que l’on pourra override à l’execution. Quelle
 commande faut-il utiliser pour lancer ce processus : CMD ou ENTRYPOINT ?*
 
-    **Réponse:**
+    Il faut utiliser CMD pour lancer ce processus.
 
