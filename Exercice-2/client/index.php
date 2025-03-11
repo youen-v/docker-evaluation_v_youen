@@ -12,15 +12,17 @@ try {
     $stmt = $pdo->query("SELECT * FROM article");
     $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    echo "<h1>Articles</h1>";
     if ($env === 'dev') {
+        echo "<h1>Articles</h1>";
         echo "<p style='color: red;'>Environnement de développement</p>";
-    }
     
-    foreach ($articles as $article) {
-        echo "<h2>Titre : {$article['title']}</h2>";
-        echo "<p>Contenu : {$article['body']}</p>";
-    }
+        foreach ($articles as $article) {
+            echo "<h2>Titre : {$article['title']}</h2>";
+            echo "<p>Contenu : {$article['body']}</p>";
+        }
+    } elseif ($env === 'prod') {
+        
+    }   
 
 } catch (PDOException $e) {
     echo "Erreur de connexion à la base de données: " . $e->getMessage();

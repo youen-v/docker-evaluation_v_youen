@@ -26,3 +26,25 @@ _6. Configurer le fichier Compose pour permettre de développer le script client
     ``
     Permet de modifier le script client PHP sans avoir à reconstruire l’image.
     La commande est: docker compose up --watch
+
+_7. En vous basant sur une stratégie de votre choix, créer des fichiers d’environnement et modifier le fichier Compose pour configurer les deux environnement différents au lancement du projet (docker compose up). Fournissez les deux commandes suivantes :_
+_Une commande pour lancer le projet dans l’environnement dev;_
+_Une autre pour lancer le projet dans l’environnement prod._
+
+    J'ai choisi une stratégie basée sur deux volumes un pour chaque environnement pour des raisons de sécurité entre les Base de Données.
+    Commande pour l'environnement de Dev : `docker compose --env-file .env.dev up -d`
+    Commande pour l'environnement de Prod : `docker compose --env-file .env.prod up -d`
+
+_8. Est-ce une bonne pratique de placer des données sensibles (password, clés secrètes, etc.) dans des variables d’environnement comme on le fait ici ? Pourquoi ? Quelle autre option mise à disposition par Docker faut-il privilégier pour le faire et pourquoi ?_
+
+    Non ce n'est pas une bonne pratique, car les variables d’environnement exposent les données sensibles.
+    Docker mets a disposition `Docker Secrets`, il stocke les données sensibles de manière chiffrée et limite leur accès aux services autorisés.
+
+## Mode Opératoire
+
+1. git clone du repository
+2. docker compose up -d --build
+3. Env DEV : docker compose --env-file .env.dev up -d
+   ([localhost port 8080](http://localhost:8080/) avec donnée dans la DB)
+4. Env PROD : docker compose --env-file .env.pro up -d
+   ([localhost port 8080](http://localhost:8080/) sans données)
